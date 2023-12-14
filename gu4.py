@@ -107,7 +107,7 @@ def gen_res(line):
 def main():
     final_lis = []
     with open(sys.argv[1]) as fi:
-        with concurrent.futures.ProcessPoolExecutor(max_workers=10) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
                 for res_dic in executor.map(gen_res, fi):
                     if res_dic:
                         print(list(res_dic.values()))
