@@ -66,13 +66,17 @@ def gen_max_min(code, indf):
         new_volume_start = 0
 
     base_df = df.iloc[new_volume_start:]
+    max_value = base_df['high'].max()
+    max_index = base_df[base_df['high'] == max_value]['index'].iloc[0]
+    next_df = base_df[base_df['index']>=max_index]
+    min_value = next_df['low'].min()
     #if code == 'sz002709':
     #    print(code)
     #    print(df)
     #    print(outliers)
     #    print(volume_start)
     #    print(base_df)
-    return base_df.iloc[3].name.strftime('%Y-%m-%d'), base_df['high'].max(), base_df['low'].min()
+    return base_df.iloc[3].name.strftime('%Y-%m-%d'), max_value, min_value
 
 def gen_res(line):
     line = line.strip()
